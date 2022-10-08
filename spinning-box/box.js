@@ -120,11 +120,6 @@ const rotX = (angle) => {
   return matrix;
 }
 
-const projMat = new mat(3, 2);
-projMat.fill(0);
-projMat.set(1, 0, 0);
-projMat.set(1, 1, 1); // Orthographic
-
 const pairwiseSummation = (a, b) => {
   let ret = 0;
   for(let i = 0; i < a.length; i++) ret += a[i] * b[i];
@@ -170,7 +165,7 @@ let trVerts;
 
 let gl;
 
-const h = 0.7;
+const h = 0.4;
 function setup() {
   const canv = document.querySelector('#glCanvas');
   gl = loadGL(canv);
@@ -206,7 +201,13 @@ function setup() {
 }
 window.onload = setup;
 
-let theta = 0, theta2 = 10, lastloop = Date.now(), dt = 0, rps = 1/10;
+const perspMat = new mat(3, 2);
+
+const orthoMat = new mat(3, 2);
+orthoMat.set(1, 0, 0);
+orthoMat.set(1, 1, 1); // Orthographic Projection Matrix
+
+let theta = 0, theta2 = 10, lastloop = Date.now(), dt = 0, rps = 1/10, distance = 1, projectionMode = 'ortho';
 function draw(timestamp) {
   const thisloop = timestamp;
   dt = 1000/(thisloop-lastloop);
@@ -215,7 +216,17 @@ function draw(timestamp) {
 
   for(let i = 0; i < trVerts.length; i += 3) {
     const rotated = matMult(rotX(theta), matMult(rotY(Math.PI*Math.cos(theta)), matMult(rotZ(2*Math.PI*Math.sin(theta)), vecToMat([trVerts[i], trVerts[i+1], trVerts[i+2]]))));
-    const projected = matMult(projMat, rotated);
+    
+    let projected;
+    if(projectionMode === 'persp') {
+      const z = 1 / (distance - rotated.get(0, 2));
+
+      perspMat.set(z, 0, 0);
+      perspMat.set(z, 1, 1); // Perspective
+
+      projected = matMult(perspMat, rotated);
+    } else projected = matMult(orthoMat, rotated);
+
     gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected)));
   }
 
