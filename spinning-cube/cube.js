@@ -170,7 +170,7 @@ let trVerts;
 
 let gl;
 
-const h = 0.5;
+const h = 0.55;
 function setup() {
   const canv = document.querySelector('#glCanvas');
   gl = loadGL(canv);
