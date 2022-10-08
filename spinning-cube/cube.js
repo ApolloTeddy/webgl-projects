@@ -165,11 +165,22 @@ let trVerts;
 
 let gl;
 
+let projectionMode = 'ortho';
+
 const h = 0.55;
+
+const orthographicButton = () => { projectionMode = 'ortho'; };
+const perspectiveButton = () => { projectionMode = 'persp'};
 function setup() {
   const canv = document.querySelector('#glCanvas');
+
   gl = loadGL(canv);
-  
+
+  const orthographicProjection = document.querySelector('.orthoBut');
+  orthographicProjection.onclick = orthographicButton;
+  const perspectiveProjection = document.querySelector('.perspBut');
+  perspectiveProjection.onclick = perspectiveButton;
+
   const shdr = shaderProgram(gl, vert, frag);
 
   trVerts = [ // X, Y, Z
@@ -228,7 +239,7 @@ const orthoMat = new mat(3, 2);
 orthoMat.set(1, 0, 0);
 orthoMat.set(1, 1, 1); // Orthographic
 
-let theta = 0, theta2 = 10, lastloop = Date.now(), dt = 0, rps = 1/10, distance = 1.8, projectionMode = 'persp';
+let theta = 0, theta2 = 10, lastloop = Date.now(), dt = 0, rps = 1/10, distance = 1.6;
 function draw(timestamp) {
   const thisloop = timestamp;
   dt = 1000/(thisloop-lastloop);
@@ -248,7 +259,11 @@ function draw(timestamp) {
       perspMat.set(z, 1, 1); // Perspective
 
       projected = matMult(perspMat, rotated);
-    } else projected = matMult(orthoMat, rotated);
+      background(142/255, 184/255, 184/255, 0.719);
+    } else {
+      projected = matMult(orthoMat, rotated); // Orthographic
+      background(161/255, 162/255, 162/255);
+    }
     
     gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected)));
   }
