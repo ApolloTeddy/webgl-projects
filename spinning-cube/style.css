@@ -18,16 +18,10 @@ body {
   cursor: pointer;
   transition: 0.4s;
 }
-
 .button:hover {
   border: solid 0.25em;
   background-color: rgba(0, 0, 0, 0);
 }
 
-.perspBut {
-  background-color: rgba(142, 184, 184, 0.719);
-}
-
-.orthoBut {
-  background-color: rgb(161, 162, 162);
-}
+.perspBut { background-color: rgba(142, 184, 184, 0.719); }
+.orthoBut { background-color: rgb(161, 162, 162); }

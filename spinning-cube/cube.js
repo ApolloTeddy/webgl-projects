@@ -143,23 +143,18 @@ const matToVec = (mat) => {
   return vector; 
 };
 
-const vert = [
-'precision mediump float;',
-'',
-'attribute vec3 vertPos;',
-'',
-'void main() {',
- 'gl_Position = vec4(vertPos, 1.0);',
-'}'
-].join('\n');
+const vert = `precision mediump float;
+attribute vec3 vertPos;
 
-const frag = [
-'precision mediump float;',
-'',
-'void main() {',
- 'gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);',
-'}'
-].join('\n');
+void main() {
+ gl_Position = vec4(vertPos, 1.0);
+}`;
+
+const frag = `precision mediump float;
+
+void main() {
+ gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+}`;
 
 let trVerts;
 
@@ -259,7 +254,7 @@ function draw(timestamp) {
       perspMat.set(z, 1, 1); // Perspective
 
       projected = matMult(perspMat, rotated);
-      background(142/255, 184/255, 184/255, 0.719);
+      background(142/255, 184/255, 184/255, 1);
     } else {
       projected = matMult(orthoMat, rotated); // Orthographic
       background(161/255, 162/255, 162/255);
