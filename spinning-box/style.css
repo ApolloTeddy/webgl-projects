@@ -1,7 +1,27 @@
-#canConA {
+body {
+  background-color: darkslategrey;
+}
+
+#canDivA {
   text-align: center;
 }
 
 #glCanvas {
   display: inline;
+  border-radius: 1em;
 }
+
+.button {
+  border: solid none;
+  display: inline-block;
+  padding: 1em 2em;
+  cursor: pointer;
+  transition: 0.4s;
+}
+.button:hover {
+  border: solid 0.25em;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.perspBut { background-color: rgba(142, 184, 184, 0.719); }
+.orthoBut { background-color: rgb(161, 162, 162); }

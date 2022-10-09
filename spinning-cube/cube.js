@@ -1,4 +1,4 @@
-const h = 0.5, rps = 1/10, distance = 1.6, perspMat = new mat(2, 3);
+const h = 0.5, rps = 1/10, distance = 1.6;
 const cube = {
   vert: `precision mediump float;
   attribute vec3 vertPos;
@@ -31,6 +31,7 @@ const cube = {
   vboBind() { gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo); }, // bind vbo function
 
   theta: 0, // angle to rotate the cube with
+  perspMat: new mat(2, 3),
   update() {
     for(let i = 0; i < this.verts.length; i += 3) { // looping through each individual vertex(x, y, z)
       const pre = vecToMat([this.verts[i], this.verts[i+1], this.verts[i+2]]); // convert the vertex to a column vector (matrix with 1 column)
@@ -43,19 +44,15 @@ const cube = {
       switch(projectionMode) {
         case 'persp': // Perspective
           const z = 1 / (distance - rotated.get(0, 2)); // Calculating the projection matrix based on distance
-          perspMat.set(z, 0, 0);
-          perspMat.set(z, 1, 1); 
+          this.perspMat.set(z, 0, 0);
+          this.perspMat.set(z, 1, 1); 
   
-          projected = matMult(perspMat, rotated); // project the rotated 3d matrix into 2d space
-          background(142/255, 184/255, 184/255, 1);
+          projected = matMult(this.perspMat, rotated); // project the rotated 3d matrix into 2d space
           break;
         case 'ortho': // Orthographic
           projected = matMult(orthoMat, rotated); // project the rotated 3d matrix into 2d space
-          background(161/255, 162/255, 162/255);
           break;
-        default:
-          return; // exit the update call if the projection mode is not found
-          break;
+        default: return; // exit the update call if the projection mode is not found
       }
       
       gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected))); // update the data in the vertex buffer. our update method pretty much just updates each of the pairs of vertexes(x, y, z) in the VB. 
@@ -74,7 +71,7 @@ const cube = {
 };
 
 // Button functions
-let projectionMode = 'ortho';
+let projectionMode = 'persp';
 
 const orthographicButton =o=> { projectionMode = 'ortho'; };
 document.querySelector('.orthoBut').onclick = orthographicButton;
@@ -98,6 +95,14 @@ window.onload = setup;
 // Draw is called every animation frame with requestAnimationFrame
 function draw(timestamp) {
   time.update(timestamp); // Calculate time.deltaTime
+
+  switch(projectionMode) { // background colors
+    case 'persp': background(142/255, 184/255, 184/255, 1);
+      break;
+    case 'ortho': background(161/255, 162/255, 162/255);
+      break;
+    default: background(0, 0, 0, 1);
+  }
 
   cube.update(); // Update the cube's rotation and VB
   cube.show(); // Show the cube to the screen
