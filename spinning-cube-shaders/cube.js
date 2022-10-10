@@ -1,4 +1,4 @@
-const h = 0.5, rps = 1/10, distance = 1.6;
+const h = 0.7, rps = 1/10;
 const cube = {
   vert: `precision mediump float;
   attribute vec3 vertPos;
@@ -21,15 +21,15 @@ const cube = {
   }`,
 
   verts: [ // XYZ, RGB
-    -h, -h, h,  0.2, 0.0, 0.6,
-     h, -h, h,  0.5, 0.1, 0.7,
+    -h, -h, h,  0.2, 0.0, 0.5,
+     h, -h, h,  0.5, 0.1, 0.5,
      h,  h, h,  0.8, 0.2, 0.3,
     -h,  h, h,  0.3, 0.1, 0.5,
 
-    -h, -h, -h,  0.2, 0.5, 0.5,
+    -h, -h, -h,  0.2, 0.2, 0.35,
      h, -h, -h,  0.2, 0.1, 0.3,
-     h,  h, -h,  0.5, 0.7, 0.5,
-    -h,  h, -h,  0.2, 0.6, 0.2,
+     h,  h, -h,  0.35, 0.5, 0.5,
+    -h,  h, -h,  0.2, 0.3, 0.2,
   ],
   indices: [ // v0,v1,v2
     0, 1, 2, // FRONT
