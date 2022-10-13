@@ -65,11 +65,14 @@ class Cube {
     this.vbo = gl.createBuffer();
     this.ibo = gl.createBuffer();
 
-    this.bind();
-
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.verts), gl.STATIC_DRAW); // make sure my vbo can fit my big load ;)
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, this.ibo);
     gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(this.indices), gl.STATIC_DRAW); // make sure my ibo can fit my big load ;)
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
+    gl.useProgram(this.shader);
+    gl.bindBuffer(gl.ARRAY_BUFFER, this.vbo);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(this.verts), gl.STATIC_DRAW); // make sure my vbo can fit my big load ;)
+    
     // vertex position
     gl.vertexAttribPointer(0, /*size of attribute(x,y,z) in count*/3, gl.FLOAT, gl.FALSE, /*size of a vertex in bytes*/6*Float32Array.BYTES_PER_ELEMENT, /*offset to attribute in vertex*/0*Float32Array.BYTES_PER_ELEMENT);
     gl.enableVertexAttribArray(0);
@@ -77,6 +80,8 @@ class Cube {
     // vertex color
     gl.vertexAttribPointer(1, /*size of attribute(r,g,b) in count*/3, gl.FLOAT, gl.FALSE, /*size of a vertex in bytes*/6*Float32Array.BYTES_PER_ELEMENT, /*offset to attribute in vertex*/3*Float32Array.BYTES_PER_ELEMENT); 
     gl.enableVertexAttribArray(1);
+
+    gl.bindBuffer(gl.ARRAY_BUFFER, null); 
 
     this.worlMatUni = gl.getUniformLocation(this.shader, 'mWorl');
     this.viewMatUni = gl.getUniformLocation(this.shader, 'mView'); // references to the uniforms in the vertex shader
@@ -92,8 +97,8 @@ class Cube {
     gl.uniformMatrix4fv(this.worlMatUni, gl.FALSE, this.wMat);
     gl.uniformMatrix4fv(this.viewMatUni, gl.FALSE, this.vMat); // push data into the uniforms. view/proj matrices will likely only need to be pushed once, unless we do not have a stationary camera.
     gl.uniformMatrix4fv(this.projMatUni, gl.FALSE, this.pMat);
-
-    this.unbind();
+    
+    gl.useProgram(null);
   };
 
   bind() {
@@ -108,20 +113,27 @@ class Cube {
     gl.useProgram(null);
   };
 
-  update() {
-    this.bind();
-    glMatrix.mat4.rotate(this.wMat, this.identity, 2*Math.PI*Math.sin(this.theta/2), [1, 0, 0]);
-    glMatrix.mat4.rotate(this.wMat, this.wMat, 3*Math.PI*Math.sin(this.theta), [0, 1, 1]);
-
-    gl.uniformMatrix4fv(this.worlMatUni, gl.FALSE, this.wMat); // push the rotated matrix into the worldMatrix uniform
-
-    this.theta += this.rps*2*Math.PI/time.deltaTime; // multiply by a full rotation (2PI), divide by the elapsed time in seconds between this frame and the last and we're normalized with theta going from 0-2PI in 1 second. then multiply by rps for revolutions per second.
-    this.unbind();
-  };
-
   show() {
     this.bind();
     gl.drawElements(gl.TRIANGLES, this.indices.length, gl.UNSIGNED_SHORT, 0);
     this.unbind();
   };
+
+  update() {
+    this.theta += this.rps*2*Math.PI/time.deltaTime; // multiply by a full rotation (2PI), divide by the elapsed time in seconds between this frame and the last and we're normalized with theta going from 0-2PI in 1 second. then multiply by rps for revolutions per second.
+    this.pushWorldMatrix();
+  };
+  set time(theta) { 
+    this.theta = theta;
+    this.pushWorldMatrix();
+  }
+
+  pushWorldMatrix() {
+    glMatrix.mat4.rotate(this.wMat, this.identity, 2*Math.PI*Math.sin(this.theta/2), [1, 0, 0]);
+    glMatrix.mat4.rotate(this.wMat, this.wMat, 3*Math.PI*Math.sin(this.theta), [0, 1, 1]);
+
+    this.bind();
+    gl.uniformMatrix4fv(this.worlMatUni, gl.FALSE, this.wMat); // push the rotated matrix into the worldMatrix uniform
+    this.unbind();
+  }
 };

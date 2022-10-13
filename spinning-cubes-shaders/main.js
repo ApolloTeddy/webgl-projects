@@ -25,10 +25,9 @@ function setup() {
     0.5, 0.1, 0.6,
     0.7, 0.0, 0.5,
     0.9, 0.5, 0.0], 0.5, 1/10); // initialize box to have normal color data, which ends up overwriting the inverted data above.
+  box2.time = Math.PI/6;
   
   time = new Time(0); // Custom time class to keep track of the deltaTime, pass in 0 to start at 0 milliseconds.
-  box2.theta = Math.PI/6;
-  box2.update(); // push theta's new value into the uniforms
   window.requestAnimationFrame(draw); // the first call of requestAnimationFrame will start the draw loop.
 }
 
@@ -37,11 +36,12 @@ function draw(timestamp) {
   time.update(timestamp); // Calculate time.deltaTime
   background(0, 0, 0);
 
+  //box.update(); 
   box.show(); // show box 1 (meant to be normal colored)
 
+  //box2.update();
   box2.show(); // show box 2 (meant to be inverted colored)
 
-  return;
   window.requestAnimationFrame(draw);
 }
 
