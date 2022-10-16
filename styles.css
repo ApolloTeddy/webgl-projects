@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --scale-value: 1.08;
+  --transition-duration: 0.2s;
+  --stepped-transition: 0.15s;
+
+  --border: #9E6A3C;
+  --primary: #FFC694;
+  --secondary: #EBAA71;
+  --navtext: aliceblue;
+  --navtext-selected: #B2DFE9;
+  --me-a: #B2DFE9;
+  --me-b: #2C899E;
+  --text: black;
+
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--secondary);
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.trans {
+  transition: var(--transition-duration);
+}
+.strans {
+  transition: var(--stepped-transition);
+}
+
+.hoverable:hover {
+  transform: scale(var(--scale-value));
+}
+
+.navbar {
+  background-color: var(--border);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-me {
+  margin: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--navtext);
+}
+.navbar-me:hover {
+  text-decoration: none;
+}
+
+.navbar-me span {
+  color: var(--me-a);
+}
+.navbar-me:hover span {
+  color: var(--me-b);
+}
+
+.navbar-links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.navbar-links li {
+  margin: 0rem 1rem;
+}
+
+.navbar-links a {
+  font-size: 1.05rem;
+  color: var(--navtext);
+}
+.navbar-links a:hover {
+  color: var(--navtext-selected);
+}
+
+.navbar-links span {
+  color: var(--navtext-selected);
+}
+
+@media screen and (max-width: 300px) {
+  .navbar-links {
+    display: none;
+  }
+}
+
+.main-content {
+  background-color: var(--primary);
+  width: calc(100% - 0.5em);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 0.25rem;
+  border: 0.15rem solid var(--border);
+  border-radius: 1rem;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.footer a {
+  width: 100%;
+  text-align: center;
+  font-size: 1.25rem;
+  color: var(--navtext);
+}
+.footer a::before, .footer a::after {
+  font-size: large;
+  content: '\0394';
+}
+.footer a:hover {
+  color: var(--navtext-selected);
+}
+
+#message {
+  margin: 0.1rem;
+  padding: 0.2rem;
+  width: 30rem;
+  height: 15rem;
+  text-align: left;
+  vertical-align: top;
+}

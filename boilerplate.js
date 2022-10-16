@@ -23,7 +23,7 @@ function loadGL(canvas) {
   }
   
   return gl;
-}
+};
 
 function shaderProgram(vertShdrSrc, fragShdrSrc) {
   const vertShdr = gl.createShader(gl.VERTEX_SHADER);
@@ -60,9 +60,9 @@ function shaderProgram(vertShdrSrc, fragShdrSrc) {
   }
   
   return program;
-}
+};
 
 function background(r, g, b, a) {
   gl.clearColor(r, g, b, a);
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-}
+};

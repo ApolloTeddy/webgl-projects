@@ -21,15 +21,15 @@ const cube = {
   }`,
 
   verts: [ // XYZ, RGB
-    -h, -h, h,  0.2, 0.0, 0.5,
-     h, -h, h,  0.5, 0.1, 0.5,
-     h,  h, h,  0.8, 0.2, 0.3,
-    -h,  h, h,  0.3, 0.1, 0.5,
+    -h, -h, h,  0.4, 0.1, 0.8, // Purple
+     h, -h, h,  0.5, 0.0, 0.2, // Burgundy
+     h,  h, h,  0.6, 0.0, 0.0, // Maroon
+    -h,  h, h,  0.7, 0.2, 0.0, // Orange-Red
 
-    -h, -h, -h,  0.2, 0.2, 0.35,
-     h, -h, -h,  0.2, 0.1, 0.3,
-     h,  h, -h,  0.35, 0.5, 0.5,
-    -h,  h, -h,  0.2, 0.3, 0.2,
+    -h, -h, -h,  0.6, 0.2, 0.9, // Royal Purple
+     h, -h, -h,  0.5, 0.1, 0.6, // Purple-Burgundy
+     h,  h, -h,  0.7, 0.0, 0.5, // Magenta
+    -h,  h, -h,  0.9, 0.5, 0.0, // Orange-Red
   ],
   indices: [ // v0,v1,v2
     0, 1, 2, // FRONT
