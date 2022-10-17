@@ -1,3 +1,5 @@
+const canvID = 'gl-canvas';
+
 const h = 0.7, rps = 1/10;
 const cube = {
   vert: `precision mediump float;
@@ -143,7 +145,7 @@ const cube = {
 // Setup is called once before the first frame is rendered
 let canv, gl, time;
 function setup() {
-  canv = document.querySelector('#glCanvas');
+  canv = document.querySelector('#' + canvID);
   gl = loadGL(canv); // Grabs a reference to webGL from our canvas in the middle of the page :)
 
   cube.init(); // Initializes the cube!

@@ -1,3 +1,5 @@
+const canvID = 'gl-canvas';
+
 const h = 0.5, rps = 1/10, distance = 1.6;
 const cube = {
   vert: `precision mediump float;
@@ -74,15 +76,15 @@ const cube = {
 let projectionMode = 'persp';
 
 const orthographicButton =o=> { projectionMode = 'ortho'; };
-document.querySelector('.orthoBut').onclick = orthographicButton;
+document.querySelector('#ortho-but').onclick = orthographicButton;
 
 const perspectiveButton =o=> { projectionMode = 'persp'; };
-document.querySelector('.perspBut').onclick = perspectiveButton;
+document.querySelector('#persp-but').onclick = perspectiveButton;
 
 // Setup is called once before the first frame is rendered
 let gl, time;
 function setup() {
-  gl = loadGL(document.querySelector('#glCanvas')); // Grabs a reference to webGL from our canvas in the middle of the page :)
+  gl = loadGL(document.querySelector('#' + canvID)); // Grabs a reference to webGL from our canvas in the middle of the page :)
 
   cube.vboInit(); // Initializes the vbo and the attribute pointers, aswell as binds it.
 

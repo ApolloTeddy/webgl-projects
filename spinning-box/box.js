@@ -1,3 +1,5 @@
+const canvasID = 'gl-canvas';
+
 const h = 0.4, rps = 1/10, distance = 1;
 const box = {
   vert : `precision mediump float;
@@ -84,14 +86,14 @@ const box = {
 let projectionMode = 'persp';
 
 const orthographicButton =o=> { projectionMode = 'ortho'; };
-document.querySelector('.orthoBut').onclick = orthographicButton;
+document.querySelector('#ortho-but').onclick = orthographicButton;
 
 const perspectiveButton =o=> { projectionMode = 'persp'; };
-document.querySelector('.perspBut').onclick = perspectiveButton;
+document.querySelector('#persp-but').onclick = perspectiveButton;
 
 let gl, time;
 function setup() {
-  gl = loadGL(document.querySelector('#glCanvas'));
+  gl = loadGL(document.querySelector('#' + canvasID));
 
   box.vboInit();
 

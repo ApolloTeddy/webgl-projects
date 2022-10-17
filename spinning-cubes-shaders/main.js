@@ -1,9 +1,11 @@
+const canvID = 'gl-canvas';
+
 // Setup is called once before the first frame is rendered
 let box, box2;
 
 let canv, gl, time;
 function setup() {
-  canv = document.querySelector('#glCanvas');
+  canv = document.querySelector('#' + canvID);
   gl = loadGL(canv); // Grabs a reference to webGL from canvas in the middle of the page
 
   box2 = new Cube([

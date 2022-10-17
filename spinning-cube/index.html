@@ -1,32 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="style.css">
-	<title>Spinning WebGL Cube</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Azavier Allen">
+    <meta name="description" content="Holder and presentation zone for my WebGL projects.">
+    <meta name="keywords" content="JS, WebGL">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="../styles.css">
+    
+    <title>Spinning WebGL Cube</title>
   </head>
   
   <body>
+    <header>
+      <nav class="navbar">
+        <a href="about.html" class="trans hoverable navbar-me">A<span class="s-trans">Allen</span></a>
+    
+        <div class="navbar-links">
+          <ul>
+            <li class="trans hoverable"><a class="s-trans" href="../index.html">Home</a></li>
+            <li class="trans hoverable"><a class="s-trans" href="../browse.html"><span>Browse</span></a></li>
+            <li class="trans hoverable"><a class="s-trans" href="../contact.html">Ask</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
     <main>
-      <div id="canDivA">
-        <h1>WebGL</h1>
-        <canvas id="glCanvas" width="400" height="400">Your browser does not support WebGL.</canvas>
+      <div class="can-div">
+        <h1>Spinning Cube</h1>
+        <canvas class="gl-canvas" id="gl-canvas" width="400" height="400">Your browser does not support WebGL.</canvas>
         <div>
-          <button class="button orthoBut">Ortho</button>
-          <button class="button perspBut">Persp</button>
+          <button id="ortho-but" class="trans hoverable button">Ortho</button>
+          <button id="persp-but" class="trans hoverable button">Persp</button>
         </div>
       </div>
     </main>
     
-    <script src="../matrix-math.js"></script>
-    <script src="../boilerplate.js"></script>
+    <script src="../utilities/matrix-math.js"></script>
+    <script src="../utilities/boilerplate.js"></script>
     <script src="cube.js"></script>
-    
-    <footer>
-      <div style="position: absolute; bottom:1em; width: 99%;">
-        <hr>
-        <p style="margin:0;">&lt;&lt;&nbsp;Azavier&nbsp;Allen&nbsp;2022&nbsp;&gt;&gt;</p>
-      </div>  
-    </footer>
   </body>
 </html>
