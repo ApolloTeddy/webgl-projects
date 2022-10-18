@@ -112,7 +112,7 @@ class Cube {
 
   update() {
     this.bind();
-    this.theta += this.rps/(2*Math.PI);
+    this.theta += time.deltaTime*this.rps*2*Math.PI;
     
     glMatrix.mat4.rotate(this.wMat, this.identity, 2*Math.PI*Math.sin(this.theta/2), [1, 0, 0]);
     glMatrix.mat4.rotate(this.wMat, this.wMat, 3*Math.PI*Math.sin(this.theta), [0, 1, 1]);

@@ -1,6 +1,6 @@
 const canvID = 'gl-canvas';
 
-const h = 0.5, rps = 1/15, distance = 1.6;
+const h = 0.5, rps = 1/10, distance = 1.6;
 const cube = {
   vert: `precision mediump float;
   attribute vec3 vertPos;
@@ -59,7 +59,7 @@ const cube = {
       
       gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected))); // update the data in the vertex buffer. our update method pretty much just updates each of the pairs of vertexes(x, y, z) in the VB. 
     }
-    this.theta += rps/(2*Math.PI);
+    this.theta += time.deltaTime*rps*2*Math.PI;
   },
   show() {
     gl.useProgram(this.shader);

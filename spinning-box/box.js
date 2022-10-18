@@ -1,6 +1,6 @@
 const canvasID = 'gl-canvas';
 
-const h = 0.4, rps = 1/15, distance = 1;
+const h = 0.4, rps = 1/10, distance = 1;
 const box = {
   vert : `precision mediump float;
   attribute vec2 vertPos;
@@ -66,7 +66,7 @@ const box = {
       }
       gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected)));
     }
-    this.theta += rps/(2*Math.PI);
+    this.theta += time.deltaTime*rps*2*Math.PI;
     this.vboUnbind();
   },
   show() {

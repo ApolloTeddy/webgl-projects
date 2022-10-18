@@ -1,6 +1,6 @@
 const canvID = 'gl-canvas';
 
-const h = 0.7, rps = 1/15;
+const h = 0.7, rps = 1/10;
 const cube = {
   vert: `precision mediump float;
   attribute vec3 vertPos;
@@ -119,7 +119,7 @@ const cube = {
 
     gl.uniformMatrix4fv(this.worlMatUni, gl.FALSE, this.wMat); // push the rotated matrix into the worldMatrix uniform
 
-    this.theta += rps/(2*Math.PI);
+    this.theta += time.deltaTime*rps*2*Math.PI;
   },
   show() {
     if(!this.assert()) return;
