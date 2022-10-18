@@ -3,13 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="author" content="Azavier Allen">
-    <meta name="description" content="Two cubes, one inscribed, rotating freely.">
+    <meta name="description" content="Real-ish-time ray tracing in WebGL hopefully">
     <meta name="keywords" content="JS, WebGL">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="../styles.css">
     
-	  <title>Spinning WebGL Cube</title>
+	  <title>Ray Tracing</title>
   </head>
   
   <body>
@@ -29,35 +29,15 @@
     
     <main>
       <div class="can-div">
-        <h1>Spinning Shadered Cubes</h1>
-        <canvas class="gl-canvas" id="gl-canvas" width="400" height="400">Your browser does not support WebGL.</canvas>
+        <h1>A Ray-traced Scene</h1>
+        <canvas class="gl-canvas" id="gl-canvas" width="1000" height="500">Your browser does not support WebGL.</canvas>
       </div>
     </main>
     
     <script src="../utilities/gl-matrix.js"></script>
     <script src="../utilities/boilerplate.js"></script>
 
-    <script type="glsl" id="cubeVertSrc"/>
-    attribute vec3 vertPos;
-    attribute vec3 vertCol;
-    varying vec3 fragCol;
-    
-    uniform mat4 mWorl;
-    uniform mat4 mView; // Uniforms for the rotation, projection, and view.
-    uniform mat4 mProj;
-    
-    void main() {
-      fragCol = vertCol;
-      gl_Position = mProj * mView * mWorl * vec4(vertPos, 1.0);
-    }</script>
-    <script type="glsl" id="cubeFragSrc"/>
-    precision mediump float;
-    varying vec3 fragCol;
-    
-    void main() {
-      gl_FragColor = vec4(fragCol, 1.0);
-    }</script>
-    <script src="cube.js"></script>
+    <script src="tracing.js"></script>
 
     <script src="main.js"></script>
   </body>

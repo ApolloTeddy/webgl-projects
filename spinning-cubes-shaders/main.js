@@ -16,7 +16,7 @@ function setup() {
     1-0.6, 1-0.2, 1-0.9,
     1-0.5, 1-0.1, 1-0.6,
     1-0.7, 1-0.0, 1-0.5,
-    1-0.9, 1-0.5, 1-0.0], 0.65, 1/7); // initialize box2 to have inverted color vertex data
+    1-0.9, 1-0.5, 1-0.0], 0.65, 1/14); // initialize box2 to have inverted color vertex data
 
   box = new Cube([
     0.4, 0.1, 0.8,
@@ -26,7 +26,7 @@ function setup() {
     0.6, 0.2, 0.9,
     0.5, 0.1, 0.6,
     0.7, 0.0, 0.5,
-    0.9, 0.5, 0.0], 0.8, 1/10); // initialize box to have normal color data, which ends up overwriting the inverted data above.
+    0.9, 0.5, 0.0], 0.8, 1/16); // initialize box to have normal color data, which ends up overwriting the inverted data above.
   box2.time = Math.PI/6;
   
   time = new Time(0); // Custom time class to keep track of the deltaTime, pass in 0 to start at 0 milliseconds.

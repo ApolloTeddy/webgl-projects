@@ -1,6 +1,6 @@
 const canvasID = 'gl-canvas';
 
-const h = 0.4, rps = 1/10, distance = 1;
+const h = 0.4, rps = 1/15, distance = 1;
 const box = {
   vert : `precision mediump float;
   attribute vec2 vertPos;
@@ -47,7 +47,7 @@ const box = {
   update() {
     this.vboBind();
     for(let i = 0; i < this.verts.length; i += 3) {
-      const rotated = matMult(rotX(this.theta), matMult(rotY(Math.PI*Math.cos(this.theta)), matMult(rotZ(2*Math.PI*Math.sin(this.theta)), vecToMat([this.verts[i], this.verts[i+1], this.verts[i+2]]))));
+      const rotated = matMult(rotX(Math.PI/2*Math.sin(this.theta + 0.24)), matMult(rotY(Math.PI*Math.cos(this.theta)), matMult(rotZ(2*Math.PI*Math.sin(this.theta)), vecToMat([this.verts[i], this.verts[i+1], this.verts[i+2]]))));
       
       let projected;
       switch(projectionMode) {
@@ -66,7 +66,7 @@ const box = {
       }
       gl.bufferSubData(gl.ARRAY_BUFFER, i * Float32Array.BYTES_PER_ELEMENT, new Float32Array(matToVec(projected)));
     }
-    this.theta += rps*2*Math.PI/time.deltaTime;
+    this.theta += rps/(2*Math.PI);
     this.vboUnbind();
   },
   show() {
@@ -83,7 +83,7 @@ const box = {
 };
 
 // Button functions
-let projectionMode = 'persp';
+let projectionMode = 'ortho';
 
 const orthographicButton =o=> { projectionMode = 'ortho'; };
 document.querySelector('#ortho-but').onclick = orthographicButton;

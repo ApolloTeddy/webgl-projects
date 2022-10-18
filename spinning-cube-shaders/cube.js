@@ -1,6 +1,6 @@
 const canvID = 'gl-canvas';
 
-const h = 0.7, rps = 1/10;
+const h = 0.7, rps = 1/15;
 const cube = {
   vert: `precision mediump float;
   attribute vec3 vertPos;
@@ -119,7 +119,7 @@ const cube = {
 
     gl.uniformMatrix4fv(this.worlMatUni, gl.FALSE, this.wMat); // push the rotated matrix into the worldMatrix uniform
 
-    this.theta += rps*2*Math.PI/time.deltaTime; // multiply by a full rotation (2PI), divide by the elapsed time in seconds between this frame and the last and we're normalized with theta going from 0-2PI in 1 second. then multiply by rps for revolutions per second.
+    this.theta += rps/(2*Math.PI);
   },
   show() {
     if(!this.assert()) return;
@@ -149,6 +149,9 @@ function setup() {
   gl = loadGL(canv); // Grabs a reference to webGL from our canvas in the middle of the page :)
 
   cube.init(); // Initializes the cube!
+
+  cube.theta = Math.PI/6;
+  cube.update();
 
   console.log('amongus'); // mongla
   time = new Time(0); // Custom time class to keep track of the deltaTime, pass in 0 to start at 0 milliseconds.

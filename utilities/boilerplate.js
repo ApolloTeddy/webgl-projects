@@ -5,7 +5,7 @@ class Time {
   };
 
   update(timestamp) {
-    this.deltaTime = 1000/(timestamp-this.lastFrame); // deltaTime is the elapsed time in seconds from the last frame.
+    this.deltaTime = (timestamp-this.lastFrame)/1000; // deltaTime is the elapsed time in seconds from the last frame.
     this.lastFrame = timestamp;
   };
 };

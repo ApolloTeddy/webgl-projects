@@ -112,7 +112,7 @@ class Cube {
 
   update() {
     this.bind();
-    this.theta += this.rps*2*Math.PI/time.deltaTime; // multiply by a full rotation (2PI), divide by the elapsed time in seconds between this frame and the last and we're normalized with theta going from 0-2PI in 1 second. then multiply by rps for revolutions per second.
+    this.theta += this.rps/(2*Math.PI);
     
     glMatrix.mat4.rotate(this.wMat, this.identity, 2*Math.PI*Math.sin(this.theta/2), [1, 0, 0]);
     glMatrix.mat4.rotate(this.wMat, this.wMat, 3*Math.PI*Math.sin(this.theta), [0, 1, 1]);

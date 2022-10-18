@@ -22,6 +22,7 @@
 
   --proj-width: 25%;
   --proj-img-height: 7rem;
+  --proj-height: 100%;
 
   font-size: 16px;
 }
@@ -124,27 +125,29 @@ a:hover {
 .project {
   --scale-value: 1.02;
   position: relative;
-  align-self: flex-start;
-
+  align-self: stretch;
+  
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   
   width: var(--proj-width);
   padding: 0.5rem;
   margin: 0rem 0;
-  
-  border: 0.15rem solid var(--border);
+
+  border: 0.13rem solid var(--border);
   border-radius: 10px;
   background-color: var(--secondary);
-  
-  overflow: clip;
 
-  z-index: 0;
+  overflow: hidden;
 }
 .project:hover {
+  border: 0.25rem solid var(--border);
   z-index: 1;
+}
+.project:hover img {
+  transform: scale(1.022);
 }
 
 .project img {
@@ -152,6 +155,7 @@ a:hover {
   top: -0.5rem;
   width: calc(100% + 1rem);
   object-fit: contain;
+  border-radius: 5px 5px 0px 0px;
 }
 
 .project span {
@@ -159,7 +163,7 @@ a:hover {
   top: -0.5rem;
   height: 0.15rem;
   background-color: var(--border);
-  width: calc(100% + 1rem);
+  width: calc(100% + 1rem); 
 }
 
 .project a {
@@ -196,11 +200,20 @@ a:hover {
   text-align: center;
 }
 
+.can-div h1 {
+  margin-bottom: 0.2rem;
+}
+
 .gl-canvas {
   border-radius: 1rem;
+  border: 0.19rem solid var(--border);
 }
 
 .button {
   padding: 0.25rem;
   border-radius: 0.25rem;
+}
+.button:active {
+  transition: 50ms;
+  transform: scale(1);
 }
